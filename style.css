@@ -1,0 +1,507 @@
+/*
+ * Global style variables
+ */
+:root {
+  /* Color palette for a light theme */
+  --primary-color: #ffffff; /* page background */
+  --secondary-color: #f5f5f5; /* card and table backgrounds */
+  --accent-color: #e0b70f; /* warm gold accent */
+  --text-color: #0a0f24; /* primary dark text */
+  --secondary-text: #5a5c6c; /* secondary muted text */
+  --danger-color: #d9534f;
+  --success-color: #25d366;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Arabic support: when body has .arabic class use Arabic font */
+body.arabic {
+  font-family: 'Tajawal', sans-serif;
+}
+
+header#hero {
+  position: relative;
+  height: 100vh;
+  /* Use a light gradient overlay on top of the hero image for the white theme */
+  background-image: linear-gradient(rgba(255,255,255,0.8), rgba(255,255,255,0.8)), url('assets/images/jiujitsu.jpg');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Navigation */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  z-index: 100;
+  /* Light background behind the navigation bar on the white theme */
+  background: rgba(255,255,255,0.95);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.logo {
+  /* The logo container now houses the image rather than text. */
+  display: flex;
+  align-items: center;
+}
+
+/* Logo image inside the navigation bar */
+.logo-img {
+  width: 120px;
+  height: auto;
+  display: block;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+}
+.nav-links li {
+  position: relative;
+}
+.nav-links a {
+  color: var(--text-color);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0;
+  height: 2px;
+  background: var(--accent-color);
+  transition: width 0.3s;
+}
+.nav-links a:hover::after {
+  width: 100%;
+}
+.lang-toggle {
+  background: var(--accent-color);
+  border: none;
+  color: var(--primary-color);
+  padding: 0.4rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: transform 0.3s ease;
+}
+.lang-toggle:hover {
+  transform: scale(1.05);
+}
+
+/* Hamburger menu (mobile) */
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 24px;
+  height: 18px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.menu-toggle span {
+  height: 2px;
+  width: 100%;
+  background: var(--text-color);
+  border-radius: 1px;
+}
+
+/* Hero content */
+.hero-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 0 2rem;
+}
+.hero-content h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+.hero-content p {
+  max-width: 650px;
+  color: var(--secondary-text);
+  margin-bottom: 2rem;
+  font-size: 1rem;
+}
+.btn {
+  display: inline-block;
+  padding: 0.8rem 2rem;
+  border: 2px solid var(--accent-color);
+  border-radius: 30px;
+  color: var(--accent-color);
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease;
+}
+.btn:hover {
+  background: var(--accent-color);
+  color: var(--primary-color);
+  transform: translateY(-2px);
+}
+
+section {
+  padding: 4rem 2rem;
+}
+section h2 {
+  text-align: center;
+  font-size: 2.2rem;
+  margin-bottom: 2.5rem;
+  font-weight: 700;
+  color: var(--accent-color);
+}
+
+/* Card grid */
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+}
+.card {
+  background: var(--secondary-color);
+  border-radius: 8px;
+  padding: 1.5rem;
+  max-width: 280px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.5);
+}
+.card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+}
+.card h3 {
+  margin-bottom: 0.4rem;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--text-color);
+}
+.card p {
+  margin-bottom: 0.3rem;
+  font-size: 0.95rem;
+  color: var(--secondary-text);
+}
+
+/* Timeline */
+.timeline {
+  list-style: none;
+  max-width: 800px;
+  margin: 0 auto;
+  padding-left: 1rem;
+  border-left: 2px solid var(--accent-color);
+}
+.timeline li {
+  position: relative;
+  margin-bottom: 2rem;
+  padding-left: 1.2rem;
+}
+.timeline li::before {
+  content: '';
+  position: absolute;
+  left: -8px;
+  top: 0.3rem;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--accent-color);
+}
+.timeline .date {
+  font-weight: 600;
+  color: var(--accent-color);
+  margin-bottom: 0.4rem;
+}
+.timeline p {
+  color: var(--secondary-text);
+  line-height: 1.5;
+}
+
+/* Membership Plans */
+.membership-options {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+}
+.plan {
+  background: var(--secondary-color);
+  padding: 2rem;
+  border-radius: 8px;
+  width: 300px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+  transition: transform 0.3s ease;
+}
+.plan:hover {
+  transform: translateY(-6px);
+}
+.plan h3 {
+  margin-bottom: 0.5rem;
+  font-size: 1.6rem;
+  color: var(--accent-color);
+}
+.plan .price {
+  font-size: 2.4rem;
+  font-weight: 700;
+  margin: 0.5rem 0 1rem;
+  color: var(--text-color);
+}
+.plan p {
+  color: var(--secondary-text);
+  font-size: 0.95rem;
+}
+.plan-btn {
+  background: var(--accent-color);
+  color: var(--primary-color);
+  border: none;
+  padding: 0.8rem 2rem;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: 600;
+  display: inline-block;
+  margin-top: 1rem;
+  transition: transform 0.3s ease;
+}
+.plan-btn:hover {
+  transform: scale(1.05);
+}
+
+/* WhatsApp Button */
+#whatsapp-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--success-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  text-decoration: none;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  z-index: 1000;
+}
+#whatsapp-button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.4);
+}
+#whatsapp-button svg {
+  width: 28px;
+  height: 28px;
+  fill: #fff;
+}
+
+/* Footer */
+footer {
+  /* Light background for the footer to match the white theme */
+  background: var(--secondary-color);
+  text-align: center;
+  padding: 1.5rem 0;
+  font-size: 0.85rem;
+  color: var(--secondary-text);
+}
+footer p {
+  margin: 0;
+}
+
+/* About Section */
+#about .about-content {
+  max-width: 800px;
+  margin: 0 auto;
+  color: var(--secondary-text);
+  line-height: 1.6;
+  font-size: 1rem;
+}
+
+/* Programs Section */
+.programs-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+}
+.program {
+  background: var(--secondary-color);
+  padding: 1.5rem;
+  border-radius: 8px;
+  width: 250px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+  transition: transform 0.3s ease;
+}
+.program:hover {
+  transform: translateY(-6px);
+}
+.program h3 {
+  margin-bottom: 0.5rem;
+  color: var(--accent-color);
+  font-size: 1.4rem;
+}
+.program p {
+  color: var(--secondary-text);
+  font-size: 0.9rem;
+}
+
+/* Schedule Section */
+.schedule-wrapper {
+  overflow-x: auto;
+}
+.schedule-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+.schedule-table th,
+.schedule-table td {
+  border: 1px solid var(--secondary-color);
+  padding: 0.75rem 1rem;
+  text-align: center;
+}
+.schedule-table th {
+  background: var(--secondary-color);
+  color: var(--accent-color);
+  font-weight: 600;
+}
+.schedule-table td {
+  background: var(--primary-color);
+  color: var(--secondary-text);
+}
+.schedule-table tr:nth-child(even) td {
+  background: var(--secondary-color);
+}
+
+/* Contact Section */
+#contact {
+  text-align: center;
+  padding: 3rem 1rem;
+}
+#contact .contact-item {
+  margin-bottom: 0.5rem;
+  color: var(--secondary-text);
+  font-size: 1rem;
+}
+
+/* Preloader overlay styles */
+#preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: var(--primary-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  transition: opacity 1s ease, visibility 1s ease;
+}
+
+#preloader.fade-out {
+  opacity: 0;
+  visibility: hidden;
+}
+
+#preloader img {
+  width: 200px;
+  height: auto;
+  animation: fadeInLogo 1.5s ease forwards;
+}
+
+@keyframes fadeInLogo {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Responsive styles */
+@media (max-width: 992px) {
+  .hero-content h1 {
+    font-size: 2.4rem;
+  }
+  .hero-content p {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 70px;
+    right: 1rem;
+    background: var(--primary-color);
+    padding: 1rem;
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+    width: 200px;
+    z-index: 1000;
+  }
+  .nav-links.open {
+    display: flex;
+  }
+  .menu-toggle {
+    display: flex;
+  }
+  .hero-content h1 {
+    font-size: 2rem;
+  }
+  section {
+    padding: 3rem 1rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .card {
+    max-width: 100%;
+  }
+  .membership-options {
+    flex-direction: column;
+    align-items: center;
+  }
+  .plan {
+    width: 100%;
+  }
+  .timeline {
+    padding-left: 0.5rem;
+  }
+}
